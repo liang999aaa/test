@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <!-- 微信JS-SDK 兼容微信小程序 引入此文件 -->
+		<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+		<!-- uni-app SDK -->
+		<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
+    <!--   引入该JS，全局注入getMetaInfo方法   -->
+    <script type="text/javascript" src="https://o.alicdn.com/yd-cloudauth/cloudauth-cdn/jsvm_all.js" ></script>
+  </head>
+  <body>
+  <div></div>
+    <script>
+    
+    // 在调用实人认证服务端发起认证请求时需要传入该MetaInfo值
+    let MetaInfo = window.getMetaInfo();
+    
+    console.log('MetaInfo', JSON.stringify(MetaInfo));
+
+    document.addEventListener('UniAppJSBridgeReady', function() {
+			console.log("加载完成，可以使用uni相关接口");
+      uni.postMessage({
+				data: {
+					// isClose: true,
+          MetaInfo:JSON.stringify(MetaInfo)
+				}
+			})
+		});
+    
+    // // 请求认证业务接口获取CertifyUrl
+    // fetch('http://认证初始化接口地址', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(MetaInfo)
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log('data:', data)
+    //     // 获取CertifyUrl后跳转至认证页面
+    //     window.location.href = data.resultObject.certifyUrl;
+    //   });
+    </script>
+  </body>
+</html>
+            

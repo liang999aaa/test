@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <!-- 微信JS-SDK 兼容微信小程序 引入此文件 -->
+		<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+		<!-- uni-app SDK -->
+		<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
+</head>
+<body>
+  <script>
+    let url = new URL(window.location.href);
+          // 获取返回的认证结果数据。
+    let parms = url.searchParams.get('response')
+    console.log('parms:', parms)
+
+    if(parms){
+      document.addEventListener('UniAppJSBridgeReady', function() {
+			console.log("======================返回参数===================");
+      uni.postMessage({
+				data: {
+          parms
+				}
+			})
+		});
+    }
+
+
+  </script>
+</body>
+</html>
